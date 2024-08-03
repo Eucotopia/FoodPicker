@@ -14,6 +14,7 @@
 		27CBD9C62C5DFA7C009A5D26 /* FoodPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CBD9C52C5DFA7C009A5D26 /* FoodPickerTests.swift */; };
 		27CBD9D02C5DFA7C009A5D26 /* FoodPickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CBD9CF2C5DFA7C009A5D26 /* FoodPickerUITests.swift */; };
 		27CBD9D22C5DFA7C009A5D26 /* FoodPickerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CBD9D12C5DFA7C009A5D26 /* FoodPickerUITestsLaunchTests.swift */; };
+		27CBD9DF2C5E3377009A5D26 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CBD9DE2C5E3373009A5D26 /* Food.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		27CBD9CB2C5DFA7C009A5D26 /* FoodPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CBD9CF2C5DFA7C009A5D26 /* FoodPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPickerUITests.swift; sourceTree = "<group>"; };
 		27CBD9D12C5DFA7C009A5D26 /* FoodPickerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPickerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		27CBD9DE2C5E3373009A5D26 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		27CBD9B32C5DFA7A009A5D26 /* FoodPicker */ = {
 			isa = PBXGroup;
 			children = (
+				27CBD9DE2C5E3373009A5D26 /* Food.swift */,
 				27CBD9B42C5DFA7A009A5D26 /* FoodPickerApp.swift */,
 				27CBD9B62C5DFA7A009A5D26 /* ContentView.swift */,
 				27CBD9B82C5DFA7C009A5D26 /* Assets.xcassets */,
@@ -259,6 +262,7 @@
 			files = (
 				27CBD9B72C5DFA7A009A5D26 /* ContentView.swift in Sources */,
 				27CBD9B52C5DFA7A009A5D26 /* FoodPickerApp.swift in Sources */,
+				27CBD9DF2C5E3377009A5D26 /* Food.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

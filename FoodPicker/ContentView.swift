@@ -1,65 +1,101 @@
-//
-//  ContentView.swift
-//  FoodPicker
-//
-//  Created by 李伟 on 2024/8/3.
-//
-
 import SwiftUI
 
-
 struct ContentView: View {
-    var food = ["汉堡","沙拉","披萨","意大利面","刀削面","火锅"]
+
+    let food = Food.example
     // @State 使得界面可以同步变量状态的变化（类似 react 中的状态绑定）
-    @State private var selectedFood: String?
+    @State private var selectedFood: Food?
 
-    // 这里是一个不透明的类型，对于用户来说并不需要确定它的具体类型，但是 Swfit 在 compile 是是可以自动推断的
+    @State private var showCalorie: Bool = false // 控制热量信息显示的状态
+
+    @State private var selectedImage: String?
+
+    // 这里是一个不透明的类型，对于用户来说并不需要确定它的具体类型，但是 Swift 在编译时是可以自动推断的
     var body: some View {
-        // vertical tack 垂直配列
+        // vertical stack 垂直配列
         VStack(spacing: 30) {
-            Image("dinner")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            Group {
+                if selectedFood?.image == nil {
+                    Image("dinner")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 250)
+                } else {
+                    Text(selectedFood?.image ?? "")
+                        .font(.system(size: 200))
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
+                }
+            }.frame(height: 250)
 
-            Text("want to eat what")
+            Text("What do you want to eat?")
                 .bold()
 
-            if selectedFood != .none {
-                Text(selectedFood ?? "")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundStyle(.green)
+            if let selectedFood = selectedFood {
+                HStack {
+                    Text(selectedFood.name)
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundStyle(.green)
+                    // 表示字体
+                    Button {
+                        // 切换 showCalorie 状态
+                        showCalorie.toggle()
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }.buttonStyle(.plain) // 仅显示图标，不显示按钮样式
+                }
+                Text("热量 \(selectedFood.calorie.formatted()) 大卡")
+                if showCalorie {
+
+                    Grid(horizontalSpacing: 40, verticalSpacing: 12){
+                        GridRow{
+                            Text("蛋白质")
+                            Text("脂肪")
+                            Text("碳水")
+                        }.frame(minWidth: 60)
+
+                        Divider()
+                            .gridCellUnsizedAxes(.horizontal)
+
+                        GridRow{
+                            Text(selectedFood.protein.formatted() + "g")
+                            Text(selectedFood.fat.formatted() + "g")
+                            Text(selectedFood.carb.formatted() + "g")
+                        }
+                    }
+                }
 
 
             }
 
-
-            Button(role: .none){
-                selectedFood =  food.shuffled().filter {$0 != selectedFood }.first
-            }label: {
-                Text((selectedFood != nil) ? "change one" : "tell me")
+            Spacer()
+            Button {
+                selectedFood = food.shuffled().first { $0 != selectedFood }
+                showCalorie = false // 切换食物时隐藏热量信息
+            } label: {
+                Text(selectedFood != nil ? "Change one" : "Tell me")
                     .frame(width: 200)
                     .transformEffect(.identity)
             }
-                .padding(.bottom,-15)
+            .padding(.bottom, -15)
 
-
-
-            // role: .destructive:表示危险动作
-            Button(role: .none){
-                selectedFood = .none
-            }label: {
-                Text("reset").frame(width: 200)
+            Button {
+                selectedFood = nil
+                showCalorie = false // 重置时隐藏热量信息
+            } label: {
+                Text("Reset")
+                    .frame(width: 200)
             }
             .buttonStyle(.bordered)
-
         }
         .font(.title)
         .padding()
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.capsule)
         .controlSize(.large)
-        .animation(.easeInOut,value: selectedFood)
+        .animation(.easeInOut, value: selectedFood)
+        .animation(.spring(dampingFraction: 0.55), value: showCalorie) // 添加动画效果
     }
 }
 
