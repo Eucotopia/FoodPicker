@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
-
+/**
+    app 入口
+ */
 @main
 struct FoodPickerApp: App {
     var body: some Scene {
+        // 视窗组
         WindowGroup {
             ContentView()
         }
